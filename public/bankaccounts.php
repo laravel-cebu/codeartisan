@@ -13,14 +13,11 @@ class BankAccounts {
 	{
 		return array_filter($this->accounts, function($account) use ($accountType)
 		{
-			return $this->isOfType($account, $accountType);
+			return $account->isOfType($accountType);
 		});
 	}
 
-	public function isOfType($account, $accountType)
-	{
-		return $account->type() == $accountType && $account->isActive();
-	}
+
 }
 
 class Account {
@@ -37,12 +34,17 @@ class Account {
 		return new static($type);
 	}
 
-	public function type()
+	public function isOfType($accountType)
+	{
+		return $this->type() == $accountType && $this->isActive();
+	}
+
+	private function type()
 	{
 		return $this->type;
 	}
 
-	public function isActive()
+	private function isActive()
 	{
 		return true;
 	}
