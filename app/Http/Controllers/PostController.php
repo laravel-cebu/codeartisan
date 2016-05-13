@@ -15,17 +15,17 @@ class PostController extends Controller
         $input = Request::all();
         $validation = Validator::make($input, ['name' => 'required']);
 
-        if (date('l') !== 'Friday') {
-            if ($validation->passes()) {
-                Post::create($input);
-
-                return Redirect::home();
-            } else {
-                return Redirect::back()->withInput()->withErrors($validation);
-            }
-        } else {
+        if (date('l') === 'Friday') {
             throw new Exception('We do not work on Fridays');
         }
+
+        if ($validation->fails()) {
+            return Redirect::back()->withInput()->withErrors($validation);
+        }
+
+        Post::create($input);
+
+        return Redirect::home();
     }
 
 }
