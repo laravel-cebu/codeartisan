@@ -14,7 +14,7 @@ class FileLessonRepository implements LessonRepositoryInterface {
 class DbLessonRepository implements LessonRepositoryInterface {
     public function getAll()
     {
-        return Lesson::all(); // violates LSP
+        return Lesson::all()->toArray(); // violates LSP
     }
 }
 
