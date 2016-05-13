@@ -1,5 +1,16 @@
 <?php
 
+interface ConnectionInterface {
+    public function connect();
+}
+
+class DbConnection implements ConnectionInterface {
+    public function connect()
+    {
+        // connection to the database
+    }
+}
+
 class PasswordReminder {
 
     /**
@@ -7,7 +18,7 @@ class PasswordReminder {
      */
     private $dbConnection;
 
-    public function __construct(MySQLConnectioN $dbConnection)
+    public function __construct(ConnectionInterface $dbConnection)
     {
         $this->dbConnection = $dbConnection;
     }
