@@ -1,8 +1,15 @@
 <?php
 
-interface WorkerInterface {
+interface WorkableInterface {
     public function work();
+}
+
+interface SleepableInterface {
     public function sleep();
+}
+
+interface ManageableInterface {
+    public function beManaged();
 }
 
 class Worker {
@@ -17,7 +24,7 @@ class Worker {
     }
 }
 
-class HumanWorker implements WorkerInterface {
+class HumanWorker implements WorkeableInterface, SleepableInterface, ManageableInterface {
 
    public function work()
    {
@@ -29,25 +36,29 @@ class HumanWorker implements WorkerInterface {
        echo 'human sleeping';
    }
 
+   public function beManaged()
+   {
+       $this->work();
+       $this->sleep();
+   }
 }
 
-class AndroidWorker implements WorkerInterface {
+class AndroidWorker implements WorkerInterface, ManageableInterface {
     public function work()
     {
         echo 'android working';
     }
 
-    public function sleep()
+    public function beManaged()
     {
-        echo ''; // ISP: Violation as it forces us to implement sleep where it doesn't make sense
+        $this->work();
     }
 }
 
 
 class Captain {
-    public function manage(Worker $worker)
+    public function manage(ManageableInterface $worker)
     {
-        $worker->work();
-        $worker->sleep();
+        $worker->beManaged();
     }
 }
