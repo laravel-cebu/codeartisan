@@ -17,11 +17,11 @@ Route::get('/', function () {
 
 Route::get('sales', function() {
 
-    $report = new Acme\Reporting\SalesReporter();
+    $report = new Acme\Reporting\SalesReporter(new \Acme\Repositories\SalesRepository);
 
     $begin = Carbon\Carbon::now()->subDays(10);
     $end = Carbon\Carbon::now();
 
-    return $report->between($begin, $end);
+    return $report->between($begin, $end, new Acme\Reporting\HtmlOutput);
 
 });
