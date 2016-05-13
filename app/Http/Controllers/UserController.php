@@ -11,99 +11,31 @@ class UserController extends Controller
 {
 
     protected $userService;
-    protected $registrationService;
-    protected $userRepository;
-    protected $stripe;
-    protected $mailer;
-    protected $userEventRepository;
-    protected $logger;
 
-    public function __construct(
-        UserService $userService,
-        RegistrationService $registrationService,
-        UserRepository $userRepository,
-        Stripe $stripe,
-        Mailer $mailer,
-        UserEventRepository $userEventRepository,
-        Logger $logger
-    )
+    public function __construct(UserService $userService)
     {
         // assignments here
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+class AuthController {
+    protected $registrationService;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function __construct(RegistrationService $registrationService)
     {
-        //
+        $this->registrationService = $registrationService;
     }
+}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+class UserService {
+    protected $userRepository;
+    protected $userEventRepository;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function __construct(UserRepository $userRepository, UserEventRepository $userEventRepository)
     {
-        //
-    }
+        $this->userRepository = $userRepository;
+        $this->userEventRepository = $userEventRepository;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
