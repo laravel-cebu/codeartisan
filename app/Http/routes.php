@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('sales', function() {
+
+    $report = new Acme\Reporting\SalesReporter();
+
+    $begin = Carbon\Carbon::now()->subDays(10);
+    $end = Carbon\Carbon::now();
+
+    return $report->between($begin, $end);
+
+});
