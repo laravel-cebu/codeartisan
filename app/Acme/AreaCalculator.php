@@ -2,11 +2,26 @@
 
 class AreaCalculator {
 
-    public function calculate($squares)
+    public function calculate($shapes)
     {
-        foreach($squares as $square)
+        foreach($shapes as $shape)
         {
-            $area[] = $square->width * $square->height;
+            if ($shape instanceof Square)
+            {
+                $area[] = $shape->width * $shape->height;
+            }
+            else if ($shape instanceof Circle)
+            {
+                $area[] = $shape->radius * $shape->radius * 3.1416;
+            }
+            // else if ($shape instanceof Triangle)
+            // {
+            //     // compute area of triangle
+            // }
+            else
+            {
+                // default
+            }
         }
 
         return array_sum($area);
